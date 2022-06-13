@@ -1,5 +1,5 @@
 RegisterServerEvent('S45RPCMDS:911Alert')
-AddEventHandler('S45RPCMDS:911Alert', function(msg)
+AddEventHandler('S45RPCMDS:911Alert', function(msg, x, y, z)
     print('911 called: '..msg)
-    TriggerClientEvent('S45RPCMDS:911AlertReturn', -1, '~r~[911]~w~ '..msg)
+    TriggerClientEvent('S45RPCMDS:911AlertReturn', -1, '~r~[911]~w~ '..msg , x, y, z)
 end)

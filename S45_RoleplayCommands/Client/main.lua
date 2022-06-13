@@ -1,16 +1,22 @@
 
 RegisterCommand('911', function(source, args)
     local msg = table.concat(args, ' ')
+    local caller = PlayerPedId()
+    local coord = GetEntityCoords(caller)
     Notify('~g~[SUCCESS]~w~ ')
-    TriggerServerEvent('S45RPCMDS:911Alert', msg)
+    TriggerServerEvent('S45RPCMDS:911Alert', msg, coord.x, coord.y, coord.z)
+end, false)
+
+RegisterCommand('delveh', function()
+    local veh = GetVehiclePedIsIn(PlayerPedId(), false)
+    DeleteVehicle(veh)
 end, false)
 
 RegisterNetEvent('S45RPCMDS:911AlertReturn')
-AddEventHandler('S45RPCMDS:911AlertReturn', function(msg)
+AddEventHandler('S45RPCMDS:911AlertReturn', function(msg, x, y, z)
     Wait(5000) -- waits 5 seconds to run
-    local coord = GetEntityCoords(PlayerPedId())
     if IsPedInAnyPoliceVehicle(PlayerPedId()) then
-        local callBlip = AddBlipForCoord(coord.x, coord.y, coord.z)
+        local callBlip = AddBlipForCoord(x, y, z)
         SetBlipSprite(callBlip, Config.BlipSprite)
         SetBlipColour(callBlip, Config.BlipColor)
         SetBlipAlpha(callBlip, 255)
