@@ -5,11 +5,6 @@ RegisterCommand('911', function(source, args)
     TriggerServerEvent('S45RPCMDS:911Alert', msg)
 end, false)
 
-RegisterCommand('delveh', function()
-    local veh = GetVehiclePedIsIn(PlayerPedId(), false)
-    DeleteVehicle(veh)
-end, false)
-
 RegisterNetEvent('S45RPCMDS:911AlertReturn')
 AddEventHandler('S45RPCMDS:911AlertReturn', function(msg)
     Wait(5000) -- waits 5 seconds to run
